@@ -1,13 +1,30 @@
 import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
 
+function ProfileSideBar(props) {
+  return (
+    <Box as="aside">
+      <img
+        src={`https://github.com/${props.githubUser}.png`}
+        alt="Foto de perfil do usuário"
+        style={{ borderRadius: "10px" }}
+      />
+      <hr />
+
+      <a className="boxLink" href={`https://github.com/${props.githubUser}`}>
+        @{props.githubUser}
+      </a>
+      <hr />
+    </Box>
+  );
+}
+
 export default function Home() {
+  const githubUser = "vandodev";
   return (
     <MainGrid>
       <div className="profileArea" style={{ gridArea: "profileArea" }}>
-        <Box>
-          <img src={`https://github.com/vandodev.png`} />
-        </Box>
+        <ProfileSideBar githubUser={githubUser} />
       </div>
       <div className="welcomeArea" style={{ gridArea: "welcomeArea" }}>
         <Box>Bem vindo</Box>
