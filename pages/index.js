@@ -1,3 +1,4 @@
+import React from "react";
 import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
 import {
@@ -27,7 +28,9 @@ function ProfileSideBar(props) {
 }
 
 export default function Home() {
+  const [comunidades, setComunidades] = React.useState(["nova"]);
   const githubUser = "vandodev";
+
   const pessoasFavoritas = [
     "juunegreiros",
     "omariosouto",
@@ -54,7 +57,9 @@ export default function Home() {
             <form
               onSubmit={function handleCriaComunidade(e) {
                 e.preventDefault();
-                console.log(e);
+
+                const comunidadesAtualizadas = [...comunidades, "nova"];
+                setComunidades(comunidadesAtualizadas);
               }}
             >
               <div>
@@ -81,6 +86,21 @@ export default function Home() {
           className="profileRelationsArea"
           style={{ gridArea: "profileRelationsArea" }}
         >
+          <ProfileRelationsBoxWrapper>
+            <ul>
+              {comunidades.map((itemAtual) => {
+                return (
+                  <li key={itemAtual}>
+                    <a href={`/users/${itemAtual}`}>
+                      {/* <img src={`https://github.com/${itemAtual}.png`} /> */}
+                      <img src={`https://place-hold.it/300x300`} />
+                      <span>{itemAtual}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
             <h2 className="subTitle">
               Pessoas da comunidade ({pessoasFavoritas.length})
