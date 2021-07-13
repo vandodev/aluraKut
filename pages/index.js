@@ -28,7 +28,13 @@ function ProfileSideBar(props) {
 }
 
 export default function Home() {
-  const [comunidades, setComunidades] = React.useState(["nova"]);
+  const [comunidades, setComunidades] = React.useState([
+    {
+      id: "12802378123789378912789789123896123",
+      title: "Eu odeio acordar cedo",
+      image: "https://alurakut.vercel.app/capa-comunidade-01.jpg",
+    },
+  ]);
   const githubUser = "vandodev";
 
   const pessoasFavoritas = [
@@ -58,7 +64,18 @@ export default function Home() {
               onSubmit={function handleCriaComunidade(e) {
                 e.preventDefault();
 
-                const comunidadesAtualizadas = [...comunidades, "nova"];
+                const dadosDoForm = new FormData(e.target);
+
+                console.log("Campo: ", dadosDoForm.get("title"));
+                console.log("Campo: ", dadosDoForm.get("image"));
+
+                const comunidade = {
+                  id: new Date().toISOString(),
+                  title: dadosDoForm.get("title"),
+                  image: dadosDoForm.get("image"),
+                };
+
+                const comunidadesAtualizadas = [...comunidades, comunidade];
                 setComunidades(comunidadesAtualizadas);
               }}
             >
@@ -90,11 +107,13 @@ export default function Home() {
             <ul>
               {comunidades.map((itemAtual) => {
                 return (
-                  <li key={itemAtual}>
-                    <a href={`/users/${itemAtual}`}>
-                      {/* <img src={`https://github.com/${itemAtual}.png`} /> */}
-                      <img src={`https://place-hold.it/300x300`} />
-                      <span>{itemAtual}</span>
+                  <li key={itemAtual.id}>
+                    <a
+                      href={`/users/${itemAtual.title} `}
+                      key={itemAtual.title}
+                    >
+                      <img src={itemAtual.image} />
+                      <span>{itemAtual.title}</span>
                     </a>
                   </li>
                 );
