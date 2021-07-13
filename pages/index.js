@@ -1,6 +1,7 @@
 import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
 import { AlurakutMenu } from "../src/lib/AlurakutCommons";
+import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
 
 function ProfileSideBar(props) {
   return (
@@ -22,6 +23,15 @@ function ProfileSideBar(props) {
 
 export default function Home() {
   const githubUser = "vandodev";
+  const pessoasFavoritas = [
+    "juunegreiros",
+    "omariosouto",
+    "peas",
+    "rafaballerini",
+    "marcobrunodev",
+    "felipefialho",
+  ];
+
   return (
     <>
       <AlurakutMenu />
@@ -36,8 +46,23 @@ export default function Home() {
           className="profileRelationsArea"
           style={{ gridArea: "profileRelationsArea" }}
         >
-          <Box>Comunidade</Box>
-          <Box>Pessoas da Comunidade</Box>
+          <ProfileRelationsBoxWrapper>
+            <h2 className="subTitle">
+              Pessoas da comunidade ({pessoasFavoritas.length})
+            </h2>
+            <ul>
+              {pessoasFavoritas.map((pessoaFavorita) => {
+                return (
+                  <li key={pessoaFavorita}>
+                    <a href={`/users/${pessoaFavorita}`}>
+                      <img src={`https://github.com/${pessoaFavorita}.png`} />
+                      <span>{pessoaFavorita}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
         </div>
       </MainGrid>
     </>
