@@ -1,6 +1,10 @@
 import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
-import { AlurakutMenu } from "../src/lib/AlurakutCommons";
+import {
+  AlurakutMenu,
+  AlurakutProfileSidebarMenuDefault,
+  OrkutNostalgicIconSet,
+} from "../src/lib/AlurakutCommons";
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
 
 function ProfileSideBar(props) {
@@ -17,6 +21,7 @@ function ProfileSideBar(props) {
         @{props.githubUser}
       </a>
       <hr />
+      <AlurakutProfileSidebarMenuDefault />
     </Box>
   );
 }
@@ -40,7 +45,10 @@ export default function Home() {
           <ProfileSideBar githubUser={githubUser} />
         </div>
         <div className="welcomeArea" style={{ gridArea: "welcomeArea" }}>
-          <Box>Bem vindo</Box>
+          <Box>
+            <h1 className="title">Bem-Vindo(a)</h1>
+            <OrkutNostalgicIconSet />
+          </Box>
         </div>
         <div
           className="profileRelationsArea"
