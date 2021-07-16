@@ -1,5 +1,7 @@
 import React from "react";
+import nookies from "nookies";
 import MainGrid from "../src/components/MainGrid";
+import jwt from "jsonwebtoken";
 import Box from "../src/components/Box";
 import {
   AlurakutMenu,
@@ -211,6 +213,9 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
+  const cookies = nookies.get(context);
+  const token = cookies.USER_TOKEN;
+  console.log("Cookies", jwt.decode(token));
   return {
     props: {
       githubUser: "vandodev",
