@@ -49,9 +49,10 @@ function ProfileRelationsBox(propriedades) {
   );
 }
 
-export default function Home() {
-  const usuarioAleatorio = "usuarioAleatorio";
+export default function Home(props) {
+  const usuarioAleatorio = props.githubUser;
   const [seguidores, setSeguidores] = React.useState([]);
+  const [comunidades, setComunidades] = React.useState([]);
   // 0 - Pegar o array de dados do github
   React.useEffect(function () {
     // GET
@@ -93,9 +94,6 @@ export default function Home() {
     // })
   }, []);
 
-  const [comunidades, setComunidades] = React.useState([]);
-  const githubUser = "vandodev";
-
   const pessoasFavoritas = [
     "juunegreiros",
     "omariosouto",
@@ -110,7 +108,7 @@ export default function Home() {
       <AlurakutMenu />
       <MainGrid>
         <div className="profileArea" style={{ gridArea: "profileArea" }}>
-          <ProfileSideBar githubUser={githubUser} />
+          <ProfileSideBar githubUser={usuarioAleatorio} />
         </div>
         <div className="welcomeArea" style={{ gridArea: "welcomeArea" }}>
           <Box>
@@ -210,4 +208,12 @@ export default function Home() {
       </MainGrid>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      githubUser: "vandodev",
+    },
+  };
 }
