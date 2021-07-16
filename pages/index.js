@@ -215,10 +215,25 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
   const token = cookies.USER_TOKEN;
+  const { githubUser } = jwt.decode(token);
+  //const githubUser = decodedToken?.githubUser;
   console.log("Cookies", jwt.decode(token));
   return {
     props: {
-      githubUser: "vandodev",
+      githubUser,
+      // githubUser: githubUser,
     },
   };
 }
+
+//isAuthenticated: false/false
+fetch(`https://alurakut.vercel.app/api/auth`, {
+  headers: {
+    Authorization:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnaXRodWJVc2VyIjoib21hcmlvc291dG9lIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2MjcwMDYxNDIsImV4cCI6MTYyNzYxMDk0Mn0.5admcRl_okiBh1Gzr6F8vK-3spAcdbrDcHz-xnoAC54",
+  },
+})
+  .then((resposta) => resposta.json())
+  .then((resultado) => {
+    console.log(resultado);
+  });
